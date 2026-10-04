@@ -1,0 +1,17 @@
+package com.example.kotoracat;
+
+import com.example.kotoracat.registry.KotoraCatEntities;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+
+@Mod(KotoraCatMod.MODID)
+public class KotoraCatMod {
+    public static final String MODID = "kotoracat";
+
+    public KotoraCatMod() {
+        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+        KotoraCatEntities.ENTITY_TYPES.register(bus);
+        KotoraCatEntities.ITEMS.register(bus);
+    }
+}
