@@ -10,15 +10,16 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
-import net.minecraft.util.Mth;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 
-/** A deliberately simple, self-contained sphynx-style model with its own UV atlas. */
+/** Stable custom cat-shaped model with a full 64x64 atlas. */
 public class KotoraCatModel extends EntityModel<KotoraCatEntity> {
     public static final ModelLayerLocation LAYER_LOCATION =
-            new ModelLayerLocation(new net.minecraft.resources.ResourceLocation(KotoraCatMod.MODID, "kotora_cat"), "main");
+            new ModelLayerLocation(new ResourceLocation(KotoraCatMod.MODID, "kotora_cat"), "main");
 
     private final ModelPart head;
     private final ModelPart body;
@@ -45,9 +46,9 @@ public class KotoraCatModel extends EntityModel<KotoraCatEntity> {
 
         root.addOrReplaceChild("head", CubeListBuilder.create()
                 .texOffs(0, 0).addBox(-4, -5, -4, 8, 8, 8)
-                .texOffs(0, 16).addBox(-2, -1, -5, 4, 3, 1) // muzzle
-                .texOffs(16, 0).addBox(-3, -6, -2, 2, 2, 2) // right ear
-                .texOffs(16, 0).addBox(1, -6, -2, 2, 2, 2), // left ear
+                .texOffs(0, 16).addBox(-2, -1, -5, 4, 3, 1)
+                .texOffs(16, 0).addBox(-3, -6, -2, 2, 2, 2)
+                .texOffs(20, 0).addBox(1, -6, -2, 2, 2, 2),
                 PartPose.offset(0, 14, -5));
 
         root.addOrReplaceChild("body", CubeListBuilder.create()
@@ -72,29 +73,25 @@ public class KotoraCatModel extends EntityModel<KotoraCatEntity> {
 
     @Override
     public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-        this.head.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-        this.body.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-        this.rightFrontLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-        this.leftFrontLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-        this.rightHindLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-        this.leftHindLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
-        this.tail.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+        head.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+        body.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+        rightFrontLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+        leftFrontLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+        rightHindLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+        leftHindLeg.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
+        tail.render(poseStack, vertexConsumer, packedLight, packedOverlay, red, green, blue, alpha);
     }
 
     @Override
     public void setupAnim(KotoraCatEntity cat, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.head.yRot = netHeadYaw * ((float)Math.PI / 180F);
-        this.head.xRot = headPitch * ((float)Math.PI / 180F);
-        float walk = Mth.cos(limbSwing * 0.6662F) * 1.2F * limbSwingAmount;
-        this.rightFrontLeg.xRot = walk;
-        this.leftHindLeg.xRot = walk;
-        this.leftFrontLeg.xRot = -walk;
-        this.rightHindLeg.xRot = -walk;
-        this.tail.yRot = Mth.sin(ageInTicks * 0.15F) * 0.25F;
-        if (cat.isEnraged()) {
-            this.tail.xRot = -0.65F;
-        } else {
-            this.tail.xRot = -0.35F;
-        }
+        head.yRot = netHeadYaw * ((float)Math.PI / 180F);
+        head.xRot = headPitch * ((float)Math.PI / 180F);
+        float walk = Mth.cos(limbSwing * 0.6662F) * 0.9F * limbSwingAmount;
+        rightFrontLeg.xRot = walk;
+        leftHindLeg.xRot = walk;
+        leftFrontLeg.xRot = -walk;
+        rightHindLeg.xRot = -walk;
+        tail.yRot = Mth.sin(ageInTicks * 0.15F) * (cat.isEnraged() ? 0.38F : 0.22F);
+        tail.xRot = cat.isEnraged() ? -0.7F : -0.35F;
     }
 }

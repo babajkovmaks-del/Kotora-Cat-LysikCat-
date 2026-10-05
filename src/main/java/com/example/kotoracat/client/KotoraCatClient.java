@@ -34,8 +34,14 @@ public final class KotoraCatClient {
         }
 
         @Override
+        private static final ResourceLocation GOOD_TEXTURE =
+                new ResourceLocation(KotoraCatMod.MODID, "textures/entity/kotora_cat_good.png");
+        private static final ResourceLocation EVIL_TEXTURE =
+                new ResourceLocation(KotoraCatMod.MODID, "textures/entity/kotora_cat_evil.png");
+
+        @Override
         public ResourceLocation getTextureLocation(KotoraCatEntity entity) {
-            return TEXTURE;
+            return entity.isEvil() ? EVIL_TEXTURE : GOOD_TEXTURE;
         }
     }
 }

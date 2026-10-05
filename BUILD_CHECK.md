@@ -7,4 +7,4 @@
 - Texture path: `assets/kotoracat/textures/entity/kotora_cat.png`.
 
 
-1.1.9 fixes custom cat spawning by registering Cat default attributes through Forge EntityAttributeCreationEvent.
+1.2.0 fixes custom cat spawning by registering Cat default attributes through Forge EntityAttributeCreationEvent.
