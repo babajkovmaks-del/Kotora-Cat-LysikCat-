@@ -23,7 +23,7 @@ public final class KotoraCatEntities {
                     .build("kotora_cat"));
 
     public static final RegistryObject<Item> KOTORA_CAT_SPAWN_EGG = ITEMS.register("kotora_cat_spawn_egg",
-            () -> new SpawnEggItem(KOTORA_CAT, 0x8C6F65, 0xE8D8CF, new Item.Properties()));
+            () -> new SpawnEggItem(KOTORA_CAT.get(), 0x8C6F65, 0xE8D8CF, new Item.Properties()));
 
     private KotoraCatEntities() {}
 }

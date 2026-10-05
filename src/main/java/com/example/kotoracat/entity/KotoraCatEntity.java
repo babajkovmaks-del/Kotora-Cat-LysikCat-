@@ -10,6 +10,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.animal.Cat;
 import net.minecraft.world.level.Level;
+import net.minecraft.server.level.ServerLevel;
 
 import java.util.EnumSet;
 import java.util.List;
@@ -76,9 +77,11 @@ public class KotoraCatEntity extends Cat {
             storm.hurt(source, 100000.0F);
 
             // Visual feedback for the special attack.
-            level().sendParticles(ParticleTypes.CRIT,
-                    storm.getX(), storm.getY() + storm.getBbHeight() * 0.5D, storm.getZ(),
-                    18, 2.0D, 2.0D, 2.0D, 0.1D);
+            if (level() instanceof ServerLevel serverLevel) {
+                serverLevel.sendParticles(ParticleTypes.CRIT,
+                        storm.getX(), storm.getY() + storm.getBbHeight() * 0.5D, storm.getZ(),
+                        18, 2.0D, 2.0D, 2.0D, 0.1D);
+            }
 
             // Phase 3: after enough rage strikes, Kotora gets a guaranteed finishing move.
             // This is what makes the requested "eventually can kill the storm" behavior
@@ -111,7 +114,7 @@ public class KotoraCatEntity extends Cat {
     }
 
     @Override
-    protected void addAdditionalSaveData(CompoundTag tag) {
+    public void addAdditionalSaveData(CompoundTag tag) {
         super.addAdditionalSaveData(tag);
         tag.putBoolean("KotoraEnraged", enraged);
         tag.putInt("KotoraRageHits", rageHits);
@@ -119,7 +122,7 @@ public class KotoraCatEntity extends Cat {
     }
 
     @Override
-    protected void readAdditionalSaveData(CompoundTag tag) {
+    public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
         enraged = tag.getBoolean("KotoraEnraged");
         rageHits = tag.getInt("KotoraRageHits");
