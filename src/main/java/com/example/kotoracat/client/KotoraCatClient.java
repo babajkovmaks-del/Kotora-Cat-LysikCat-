@@ -3,8 +3,6 @@ package com.example.kotoracat.client;
 import com.example.kotoracat.KotoraCatMod;
 import com.example.kotoracat.entity.KotoraCatEntity;
 import com.example.kotoracat.registry.KotoraCatEntities;
-import net.minecraft.client.model.CatModel;
-import net.minecraft.client.model.geom.ModelLayers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
@@ -18,16 +16,21 @@ public final class KotoraCatClient {
     private KotoraCatClient() {}
 
     @SubscribeEvent
+    public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(KotoraCatModel.LAYER_LOCATION, KotoraCatModel::createBodyLayer);
+    }
+
+    @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(KotoraCatEntities.KOTORA_CAT.get(), KotoraCatRenderer::new);
     }
 
-    public static final class KotoraCatRenderer extends MobRenderer<KotoraCatEntity, CatModel<KotoraCatEntity>> {
+    public static final class KotoraCatRenderer extends MobRenderer<KotoraCatEntity, KotoraCatModel> {
         private static final ResourceLocation TEXTURE =
                 new ResourceLocation(KotoraCatMod.MODID, "textures/entity/kotora_cat.png");
 
         public KotoraCatRenderer(EntityRendererProvider.Context context) {
-            super(context, new CatModel<>(context.bakeLayer(ModelLayers.CAT)), 0.4F);
+            super(context, new KotoraCatModel(context.bakeLayer(KotoraCatModel.LAYER_LOCATION)), 0.35F);
         }
 
         @Override

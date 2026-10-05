@@ -1,13 +1,7 @@
-# Build verification — Kotora Cat 1.1.1
+# Kotora Cat 1.1.4 build notes
 
-Проверено локально:
-- структура ForgeGradle-проекта;
-- JSON-файлы;
-- PNG-текстура 64x32;
-- TOML `mods.toml`;
-- баланс скобок во всех Java-файлах;
-- renderer зарегистрирован как `MobRenderer<KotoraCatEntity, CatModel<KotoraCatEntity>>`;
-- сохранение состояния ярости в NBT;
-- GitHub Actions использует JDK 17 и Gradle 8.1.1.
-
-Полную Gradle-компиляцию в среде подготовки нельзя выполнить без загрузки ForgeGradle/Minecraft-зависимостей из Maven. Поэтому этот архив не следует считать бинарно подтверждённым JAR, пока GitHub Actions или локальный `gradle build` не завершится успешно.
+- Minecraft Java 1.20.1 / Forge 47.4.3.
+- Java 17.
+- Custom self-contained KotoraCatModel with a dedicated 64x64 UV atlas.
+- No longer uses vanilla `ModelLayers.CAT`, so the photo-derived texture cannot be misaligned by the vanilla cat UV layout.
+- Texture path: `assets/kotoracat/textures/entity/kotora_cat.png`.
