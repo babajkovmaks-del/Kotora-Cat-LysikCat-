@@ -5,3 +5,6 @@
 - Custom self-contained KotoraCatModel with a dedicated 64x64 UV atlas.
 - No longer uses vanilla `ModelLayers.CAT`, so the photo-derived texture cannot be misaligned by the vanilla cat UV layout.
 - Texture path: `assets/kotoracat/textures/entity/kotora_cat.png`.
+
+
+1.1.9 fixes custom cat spawning by registering Cat default attributes through Forge EntityAttributeCreationEvent.

@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'com.example.kotoracat'
-version = '1.1.8'
+version = '1.1.9'
 
 base { archivesName = 'kotora-cat-addon-1.20.1' }
 
