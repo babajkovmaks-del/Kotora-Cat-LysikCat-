@@ -5,7 +5,7 @@ import com.example.kotoracat.entity.KotoraCatEntity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.SpawnEggItem;
+import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -23,7 +23,7 @@ public final class KotoraCatEntities {
                     .build("kotora_cat"));
 
     public static final RegistryObject<Item> KOTORA_CAT_SPAWN_EGG = ITEMS.register("kotora_cat_spawn_egg",
-            () -> new SpawnEggItem(KOTORA_CAT.get(), 0x8C6F65, 0xE8D8CF, new Item.Properties()));
+            () -> new ForgeSpawnEggItem(KOTORA_CAT, 0x8C6F65, 0xE8D8CF, new Item.Properties()));
 
     private KotoraCatEntities() {}
 }
