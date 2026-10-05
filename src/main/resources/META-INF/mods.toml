@@ -3,7 +3,7 @@ loaderVersion="[47,)"
 license="MIT"
 [[mods]]
 modId="kotoracat"
-version="1.1.4"
+version="1.1.6"
 displayName="Kotora Cat - Wither Storm Nemesis"
 authors="Kotora Cat Project"
 description='''Adds Kotora Cat. After the cat humiliates Cracker's Wither Storm, it enters permanent rage, hunts the storm, attacks it, and eventually performs a finishing move. The Wither Storm mod remains a separate dependency.'''

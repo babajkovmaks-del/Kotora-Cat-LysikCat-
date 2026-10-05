@@ -6,12 +6,12 @@ import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
-import net.minecraft.client.model.geom.builders.CubeDeformation;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.util.Mth;
+import net.minecraft.client.renderer.RenderType;
 
 /** A deliberately simple, self-contained sphynx-style model with its own UV atlas. */
 public class KotoraCatModel extends EntityModel<KotoraCatEntity> {
@@ -27,7 +27,7 @@ public class KotoraCatModel extends EntityModel<KotoraCatEntity> {
     private final ModelPart tail;
 
     public KotoraCatModel(ModelPart root) {
-        super(root);
+        super(RenderType::entityCutoutNoCull);
         this.head = root.getChild("head");
         this.body = root.getChild("body");
         this.rightFrontLeg = root.getChild("right_front_leg");
