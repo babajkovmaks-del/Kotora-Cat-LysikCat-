@@ -56,3 +56,6 @@ Cracker's Wither Storm Mod официально имеет релиз 4.2.1 дл
 ## Сборка через GitHub Actions
 
 В проекте уже есть `.github/workflows/build.yml`. Он использует установленный GitHub Actions Gradle 8.1.1 и команду `gradle build`. **Не меняйте её на `./gradlew build`, если в репозитории нет Gradle Wrapper.** После push в `main` или через `Actions -> Build Kotora Cat -> Run workflow` сборка создаст artifact `kotora-cat-1.1.2`.
+
+
+Сборка 1.1.3 использует Forge 1.20.1-47.4.3. Это исправляет ошибочную ссылку на 47.4.21. Настройки Gradle приведены к стандартной схеме ForgeGradle 6.
