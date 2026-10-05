@@ -1,8 +1,8 @@
-# Kotora Cat 1.1.1 — Wither Storm Nemesis
+# Kotora Cat 1.1.2 — Wither Storm Nemesis
 
 Аддон для **Minecraft Java 1.20.1 + Forge** и **Cracker's Wither Storm Mod 4.2.1**.
 
-## Что изменилось в 1.1.1
+## Что изменилось в 1.1.2
 
 - Кот сначала должен приблизиться к Wither Storm.
 - При приближении происходит сцена «унижения»: кот шипит, Буря получает имя `Wither Storm — humiliated by Kotora Cat`, а кот навсегда входит в режим ярости.
@@ -33,7 +33,7 @@ Cracker's Wither Storm Mod официально имеет релиз 4.2.1 дл
 
 В папку `mods` Minecraft 1.20.1 Forge положить:
 
-1. `kotora-cat-addon-1.20.1-1.1.1.jar`
+1. `kotora-cat-addon-1.20.1-1.1.2.jar`
 2. `witherstormmod-1.20.1-4.2.1-all.jar`
 
 После запуска можно получить кота яйцом призыва или командой:
@@ -51,3 +51,8 @@ Cracker's Wither Storm Mod официально имеет релиз 4.2.1 дл
 ## Важное ограничение
 
 Этот ZIP **не является уже скомпилированным JAR**. В среде создания архива нет установленного Gradle/Forge Maven-кэша, поэтому я не буду выдавать исходники за гарантированно готовый бинарный мод.
+
+
+## Сборка через GitHub Actions
+
+В проекте уже есть `.github/workflows/build.yml`. Он использует установленный GitHub Actions Gradle 8.1.1 и команду `gradle build`. **Не меняйте её на `./gradlew build`, если в репозитории нет Gradle Wrapper.** После push в `main` или через `Actions -> Build Kotora Cat -> Run workflow` сборка создаст artifact `kotora-cat-1.1.2`.
