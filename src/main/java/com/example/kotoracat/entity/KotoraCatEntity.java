@@ -12,9 +12,9 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.AgeableMob;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -110,7 +110,7 @@ public class KotoraCatEntity extends TamableAnimal {
         if (target == this) return false;
         if (isOwnedBy(target)) return false;
         if (target instanceof Player player && player.isCreative()) return false;
-        return target instanceof Enemy || target.getMobType() == MobType.MONSTER || isStorm(target);
+        return target instanceof Enemy || isStorm(target);
     }
 
     private LivingEntity findBestTarget() {
@@ -247,7 +247,7 @@ public class KotoraCatEntity extends TamableAnimal {
     }
 
     @Override
-    protected InteractionResult mobInteract(Player player, InteractionHand hand) {
+    public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
 
         if (isTame() && isOwnedBy(player) && stack.isEmpty()) {
@@ -356,6 +356,16 @@ public class KotoraCatEntity extends TamableAnimal {
     @Override
     protected SoundEvent getDeathSound() {
         return SoundEvents.CAT_DEATH;
+    }
+
+    @Override
+    public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob partner) {
+        KotoraCatEntity child = com.example.kotoracat.registry.KotoraCatEntities.KOTORA_CAT.get().create(level);
+        if (child != null) {
+            child.personality = level.random.nextBoolean() ? Personality.KIND : Personality.EVIL;
+            child.personalitySeed = level.random.nextLong();
+        }
+        return child;
     }
 
     @Override

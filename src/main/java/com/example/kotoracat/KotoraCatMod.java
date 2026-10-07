@@ -5,7 +5,7 @@ import com.example.kotoracat.registry.KotoraCatEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraft.commands.Commands;
 import net.minecraft.world.level.LightLayer;
@@ -48,7 +48,7 @@ public class KotoraCatMod {
         }
 
         private static int tameNearest(net.minecraft.commands.CommandSourceStack source) throws com.mojang.brigadier.exceptions.CommandSyntaxException {
-            Player player = source.getPlayerOrException();
+            ServerPlayer player = source.getPlayerOrException();
             KotoraCatEntity best = null;
             double bestDistance = Double.MAX_VALUE;
             for (KotoraCatEntity cat : player.serverLevel().getEntitiesOfClass(
@@ -69,7 +69,7 @@ public class KotoraCatMod {
         }
 
         private static int tameAll(net.minecraft.commands.CommandSourceStack source) throws com.mojang.brigadier.exceptions.CommandSyntaxException {
-            Player player = source.getPlayerOrException();
+            ServerPlayer player = source.getPlayerOrException();
             int count = 0;
             for (KotoraCatEntity cat : player.serverLevel().getEntitiesOfClass(
                     KotoraCatEntity.class, player.getBoundingBox().inflate(64.0D), e -> !e.isTame())) {

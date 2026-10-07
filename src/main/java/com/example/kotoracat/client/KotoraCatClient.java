@@ -33,7 +33,6 @@ public final class KotoraCatClient {
             super(context, new KotoraCatModel(context.bakeLayer(KotoraCatModel.LAYER_LOCATION)), 0.35F);
         }
 
-        @Override
         private static final ResourceLocation GOOD_TEXTURE =
                 new ResourceLocation(KotoraCatMod.MODID, "textures/entity/kotora_cat_good.png");
         private static final ResourceLocation EVIL_TEXTURE =
